@@ -1,0 +1,494 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Introduction to Open Policy Agent</title>
+
+		<!-- bootstrap -->
+		<link rel="stylesheet" href="ext/bootstrap-5.1.3-dist/css/bootstrap.css">
+		<!-- -->
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/white.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+
+		<!-- remove annoying shadow around images -->
+		<style>
+			.reveal section img {
+				background-color:white;
+				border:0;
+				box-shadow: 0 0 0 0;
+			}
+		</style>
+		<!-- -->
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<!-- p>U<span style="text-transform: lowercase;">sługi i platformy dew dla aplikacji<br /> w Chmurze</span></p -->
+
+					<h3>I<span style="text-transform: lowercase;">ntroduction to</span> O<span style="text-transform: lowercase;">pen</span> P<span style="text-transform: lowercase;">olicy </span>A<span style="text-transform: lowercase;">gent</span></h3>
+
+					<img width="20%" src="img/opa-no-text-color.png" />
+
+					<h6><small>W<span style="text-transform: lowercase;">ojciech</span> B<span style="text-transform: lowercase;">arczyński</span>, VP <span style="text-transform: lowercase;">of</span> E<span style="text-transform: lowercase;">ngineering</span><br />
+							<span style="text-transform: lowercase;">wojciechb@spacelift.io</span></small>
+				</section>
+
+				<section>
+					<h3>P<span style="text-transform: lowercase;">roblem</span></h3>
+					<div class="container">
+						<div class="row">
+							<div class='col-md-6'>
+								<p>Chasing the rabbit:</p>
+								<ul>
+									<li>Policies</li>
+									<li>Configuration</li>
+									<li>and ofc secure</li>
+								</ul>
+							</div>
+							<div class='col-md-6'>
+								<img width="100%" style="object-fit: fill;" src="img/rabbit_3778903507_a80007400b_c.jpg" />
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+### P<span style="text-transform: lowercase;">otential solutions</span>
+
+- Endless forms
+- Markup language
+					</script>
+				</section>
+				<!-- https://www.jspolicy.com/ -->
+				<!-- https://kyverno.io/ -->
+
+				<section data-markdown>
+					<script type="text/template">
+### P<span style="text-transform: lowercase;">otential solutions</span>
+
+- Scripting language embedded
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+### P<span style="text-transform: lowercase;">olicy as-a-code</span>
+
+- Dedicated language with safety guarantees
+- Work on loosly structured data
+- have a JSON support
+					</script>
+				</section>
+
+				<section>
+					<h4>O<span style="text-transform: lowercase;">pen</span> P<span style="text-transform: lowercase;">olicy</span> A<span style="text-transform: lowercase;">gent</span></h4>
+					<div class="container">
+						<div class="row">
+							<div class='col-md-5'>
+								<img width="55%" src="img/opa-no-text-color.png" />
+								<p><smalL>Created by<br /><img src="https://d33wubrfki0l68.cloudfront.net/ce60c030ed59a4a5e5809aadbaf79f8ed13bcb67/b825f/img/styra-logo.jpg" /></small></p>
+								<p><small><a href="https://www.openpolicyagent.org/">openpolicyagent.org</a></smalL></p>
+							</div>
+							<div class='col-md-7'>
+								<img width="90%" style="object-fit: fill;" src="https://d33wubrfki0l68.cloudfront.net/965b3d00a65c84c83bed88b2e70f1a3baff767cc/801b5/img/banner-image.png" />
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<section>
+					<h3>O<span style="text-transform: lowercase;">pen</span> P<span style="text-transform: lowercase;">olicy</span> A<span style="text-transform: lowercase;">gent</span></h3>
+					<div class="container">
+						<div class="row">
+							<div class='col-md-6'>
+								<p><ol>
+									<li>Query/transformation language (rego)</li>
+									<li>Works on loosly structured data</li>
+									<li>With JSON and graph support</li>
+								</ol></p>
+							</div>
+							<div class='col-md-6'>
+								<img width="100%" style="object-fit: fill;" src="img/opa-service.svg" />
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+### D<span style="text-transform: lowercase;">emo</span>
+
+<a href="https://play.openpolicyagent.org/">play.openpolicyagent.org</a>
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+### D<span style="text-transform: lowercase;">emo</span>
+
+Input:
+
+<pre style="display: block; width: 100%;"><code class="language-json">{
+  "session": {
+    "login": "natalia@example.com",
+    "teams": ["DevOps"],
+    "member": true
+  }
+}</code></pre>
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+### D<span style="text-transform: lowercase;">emo</span>
+
+Policy:
+
+<pre style="display: block; width: 100%;"><code class="language-js">package talk_opa
+teams := input.session.teams
+
+admin { teams[_] == "DevOps" }
+allow { teams[_] == "Engineering" }
+deny  { not input.session.member }</code></pre>
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+### R<span style="text-transform: lowercase;">ego</span>
+
+- Declarative;
+- Supports arbitrarily nested documents;
+- Readable and easier for non-programmers*;
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+### R<span style="text-transform: lowercase;">ego</span>
+
+- You can run the custom code safe:
+  - non Turing-complete (no loops or conditionals);
+  - guaranteed to terminate;
+  - ensures that queries are correct<br />and unambiguous.
+
+- [Build-in functions](https://www.openpolicyagent.org/docs/latest/policy-reference/#built-in-functions)
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+### R<span style="text-transform: lowercase;">ego</span>
+
+- inspired by [Datalog](https://en.wikipedia.org/wiki/Datalog)
+- support reasoning
+- extended with support for structured documents
+- Rego queries are assertions on data stored in OPA
+					</script>
+				</section>
+
+
+				<section data-markdown>
+					<script type="text/template">
+### D<span style="text-transform: lowercase;">emo</span>
+
+Data - global values:
+
+<pre style="display: block; width: 100%;"><code class="language-json">{
+  "maintenance": false,
+  "region": "eu-west-1"
+}</code></pre>
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+### E<span style="text-transform: lowercase;">cosystem</span>
+
+<img src="img/ecosystem.png" width="80%" />
+					</script>
+				</section><!-- small><p><a href="https://www.openpolicyagent.org/docs/latest/ecosystem/">docs</a></p></small -->
+
+				<section data-markdown>
+					<script type="text/template">
+### C<span style="text-transform: lowercase;">heckers &amp; linters</span>
+
+- [conftest](https://www.conftest.dev/)
+- [kics.io](https://github.com/Checkmarx/kics/blob/master/docs/queries.md)
+					</script>
+				</section>
+				<!--
+				https://www.checkov.io/
+				-->
+
+				<section data-markdown>
+					<script type="text/template">
+### C<span style="text-transform: lowercase;">heckers &amp; linters</span>
+
+[conftest](https://www.conftest.dev/)
+
+```rego
+package main
+
+import data.kubernetes
+
+name = input.metadata.name
+
+deny[msg] {
+	kubernetes.is_deployment
+	not input.spec.template.spec.securityContext.runAsNonRoot
+
+	msg = sprintf("must not run as root in Deploy %s", [name])
+}
+```
+					</script>
+				</section>
+				<!--
+				infra-as-a-code linters
+
+				- conftest
+				- kics.io
+				- checkov
+				- tfsec
+				- https://github.com/terraform-linters/tflint
+
+				?
+				- https://github.com/returntocorp/semgrep
+				- https://github.com/tenable/terrascan
+				- https://github.com/fugue/regula
+				-->
+
+				<!--Rego policies
+				https://github.com/redhat-cop/rego-policies
+				https://github.com/Cigna/confectionery
+				-->
+
+				<section data-markdown>
+					<script type="text/template">
+### K<span style="text-transform: lowercase;">ubernetes</span>
+
+Admission hooks:
+
+<img src="img/gateway3.svg" width="50%" />
+
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+### K<span style="text-transform: lowercase;">ubernetes</span>
+
+```rego
+package kubernetes.admission
+operations = {"CREATE","UPDATE"}
+
+input_container[c] {
+  c := input.request.object.spec.template.spec.containers[_]
+}
+
+deny[reason] {
+  input.request.kind.kind == "Deployment"
+  operations[input.request.operation]
+  input_container[container]
+  not container.resources.limits.cpu
+  reason := sprintf("no cpu limit for container %v", [container.name])
+}
+```
+					</script>
+				</section>
+				<!-- https://www.digihunch.com/2022/01/kubernetes-admission-control/ -->
+				<!--
+				library: https://github.com/open-policy-agent/gatekeeper-library/tree/master/library
+				-->
+
+				<section data-markdown>
+					<script type="text/template">
+### K<span style="text-transform: lowercase;">ubernetes</span>
+
+OPA integrations:
+
+- Istio
+- Envoy
+					</script>
+				</section>
+
+
+				<section data-markdown>
+					<script type="text/template">
+### Y<span style="text-transform: lowercase;">our app/tool</span>
+
+<img src="img/opa_two_modes.png" width="50%" />
+
+					</script>
+				</section>
+
+<!--
+				<section>
+					<h4>O<span style="text-transform: lowercase;">pen</span> P<span style="text-transform: lowercase;">olicy</span> A<span style="text-transform: lowercase;">gent</span></h4>
+					<div class="container">
+						<div class="row">
+							<div class='col-md-5'>
+								<img width="40%" src="https://d33wubrfki0l68.cloudfront.net/539cdea7bd5dac481d3f354c1e071e5e514f1507/739e9/img/deployment-options-3.png" />
+							</div>
+							<div class='col-md-7'>
+								<img width="40%" style="object-fit: fill;" src="https://d33wubrfki0l68.cloudfront.net/be6915282467f723d0c67cb8666e4c59965dd2b1/cb561/img/deployment-options-1.png" />
+							</div>
+						</div>
+					</div>
+				</section> -->
+
+				<!-- <section data-markdown>
+					<script type="text/template">
+### OPA <span style="text-transform: lowercase;">in your app/tool</span>
+
+Two modes:
+
+
+
+- embedded
+- REST service
+
+					</script>
+				</section> -->
+
+				<section data-markdown>
+					<script type="text/template">
+### G<span style="text-transform: lowercase;">olang & </span>OPA
+
+- Golang lib - embed OPA
+- Golang SDK - high level API
+
+<p><small>See <a href="https://www.openpolicyagent.org/docs/latest/integration/#comparison">docs</a></small></p>
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+### G<span style="text-transform: lowercase;">olang & </span>OPA
+
+Let's dive into the code.
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+### G<span style="text-transform: lowercase;">olang & </span>OPA
+
+```golang
+var (
+	unsafeBuiltins = map[string]struct{}{
+		"http.send":         {},
+		"opa.runtime":       {},
+		"rego.parse_module": {},
+		"time.now_ns":       {},
+		"trace":             {},
+	}
+)
+```
+
+```golang
+rego.UnsafeBuiltins(unsafeBuiltins)
+```
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+### G<span style="text-transform: lowercase;">olang & </span>OPA
+
+You can also add your custom functions for your customer to use, see [docs](https://www.openpolicyagent.org/docs/latest/extensions/#custom-built-in-functions-in-go).
+
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+### L<span style="text-transform: lowercase;">essons learnt</span>
+
+Open Policy Agent:
+
+- easily integrates with Golang
+- implement policy-as-a-code in a safe way
+- not only for policies
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+### L<span style="text-transform: lowercase;">essons learnt</span>
+
+Rego requires some time to master:
+
+1. [Policy workbench with samples](https://docs.spacelift.io/concepts/policy#policy-workbench-in-practice)
+2. [Examples](https://github.com/spacelift-io/spacelift-policies-example-library) and [docs](https://docs.spacelift.io/concepts/policy)
+3. [Policy testing](https://www.openpolicyagent.org/docs/latest/policy-testing/)
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+### L<span style="text-transform: lowercase;">essons learnt</span>
+
+Styra, for example, provides an interactive builder:
+
+- [Policy Builder](https://docs.styra.com/policies/policy-authoring/policy-builder/use-policy-builder)
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+### A<span style="text-transform: lowercase;">lternatives</span>
+
+- [cuelang](https://cuelang.org/)
+- [kyverno](https://kyverno.io/)
+- [Sentinel](https://docs.hashicorp.com/sentinel/concepts/policy-as-code)
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+<img src="img/spacelift_logo.svg" width="40%" />
+
+Slides and code:<br />[github.com/wojciech12](https://github.com/wojciech12/talk_intro_OpenPolicyAgent)
+
+<p><small><b>Wojciech Barczynski</b><br/><i>wojciechb@spacelift.io</i></small></p>
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+
+<img src="img/spacelift_logo.svg" width="40%" />
+
+<b>Hiring</b><br />(Go) Backend and Frontend developers<br />with a passion for building tools<br /> for other engineers.
+					</script>
+				</section>
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+	</body>
+</html>
