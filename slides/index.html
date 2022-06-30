@@ -60,6 +60,38 @@
 					</div>
 				</section>
 
+				<section>
+					<h3>B<span style="text-transform: lowercase;">uilding your own app</span></h3>
+					<div class="container">
+						<div class="row">
+							<div class='col-md-5'>
+								<p>Spacelift.io:</p>
+								<ul>
+									<li>SaaS<br />for Infra-as-a-Code</li>
+									<li>Power users</li>
+								</ul>
+							</div>
+							<div class='col-md-7'>
+								<img width="100%" style="object-fit: fill;" src="https://1737839032-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2F-LshwwDZmA4HXN0k9e8O%2Fuploads%2Fw2sPZz6sRrgalfBd3PV3%2FScreen%20Shot%202022-06-29%20at%202.47.11%20PM.png?alt=media&token=244f5ab7-7922-434b-a539-203af6840ecd" />
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<section>
+					<h3>I<span style="text-transform: lowercase;">nfra / platform teams</span></h3>
+					<div class="container">
+						<div class="row">
+							<div class='col-md-12'>
+								<ul>
+									<li>Share/Enforce best practices</li>
+									<li>Enable other teams to contribute</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</section>
+
 				<section data-markdown>
 					<script type="text/template">
 ### P<span style="text-transform: lowercase;">otential solutions</span>
@@ -166,9 +198,18 @@ deny  { not input.session.member }</code></pre>
 					<script type="text/template">
 ### R<span style="text-transform: lowercase;">ego</span>
 
-- Declarative;
-- Supports arbitrarily nested documents;
 - Readable and easier for non-programmers*;
+- Declarative;
+- inspired by [Datalog](https://en.wikipedia.org/wiki/Datalog)
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+### R<span style="text-transform: lowercase;">ego</span>
+
+- extended with support for arbitrary structured documents
+- [Build-in functions](https://www.openpolicyagent.org/docs/latest/policy-reference/#built-in-functions)
 					</script>
 				</section>
 
@@ -180,22 +221,8 @@ deny  { not input.session.member }</code></pre>
   - non Turing-complete (no loops or conditionals);
   - guaranteed to terminate;
   - ensures that queries are correct<br />and unambiguous.
-
-- [Build-in functions](https://www.openpolicyagent.org/docs/latest/policy-reference/#built-in-functions)
 					</script>
 				</section>
-
-				<section data-markdown>
-					<script type="text/template">
-### R<span style="text-transform: lowercase;">ego</span>
-
-- inspired by [Datalog](https://en.wikipedia.org/wiki/Datalog)
-- support reasoning
-- extended with support for structured documents
-- Rego queries are assertions on data stored in OPA
-					</script>
-				</section>
-
 
 				<section data-markdown>
 					<script type="text/template">
@@ -377,7 +404,7 @@ Two modes:
 					<script type="text/template">
 ### G<span style="text-transform: lowercase;">olang & </span>OPA
 
-Let's dive into the code.
+Let's dive into [the code](https://github.com/wojciech12/talk_policies_for_your_apps_with_OpenPolicyAgent).
 					</script>
 				</section>
 
