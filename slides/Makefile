@@ -8,5 +8,12 @@ give_me_pdf:
 		-v $$(pwd):/home/user astefanutti/decktape:$(DECKTAPE_VERSION) \
 		-s 2560x1600 index.html index.pdf
 
+give_me_pdf_pl:
+	docker run --rm -v $$(pwd):/slides \
+		--platform linux/amd64 \
+		-v $$(pwd):/home/user astefanutti/decktape:$(DECKTAPE_VERSION) \
+		-s 2560x1600 index_pl.html index_pl.pdf
+
+
 give_me_zip:
 	cd .. && zip -r $(CURDIR).zip $(CURDIR)/*
